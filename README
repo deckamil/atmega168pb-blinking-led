@@ -1,0 +1,123 @@
+*** Introduction ***
+
+This repository contains Blinking-Led program for AVR ATmega168PB Xplained Mini
+development board. The dev board has one led light and one button. The program
+turns on and off the led light in sequence after pressing the button.
+
+IF button was pressed
+	- turn on led for 10 seconds
+	- turn off led for 10 seconds
+	- turn on led for 10 seconds
+OTHERWISE
+	- turn off led
+
+The program was created for AVR ATmega168PB Xplained Mini development board.
+
+
+*** Prerequisites ***
+
+To build and load this program into AVR ATmega168PB Xplained Mini development
+board please obtain:
+	- AVR8 GNU Toolchain v3.6.1
+	- Atmel Studio v7.0.2389
+	
+The AVR8 GNU Toolchain and Atmel Studio can be found at Microchip webpage.
+<https://www.microchip.com/>
+
+To build this program use the Makefile available under Build directory in this
+repository. Before first build, set the following environment variables with
+paths to required tools:
+
+ATMEL_MAKE     <atmel studio installation directory>/Studio/7.0/shellutils/make.exe
+AVR_GCC        <avr8 gnu toolchain installation directory>/bin/avr-gcc.exe
+AVR_SIZE       <avr8 gnu toolchain installation directory>/bin/avr-size.exe
+
+
+*** Build ***
+
+To build the program with command prompt:
+1. Obtain copy of this repository
+2. Open command prompt
+3. Change directory in command prompt with cd command to Build directory
+4. Use one of the following make commands:
+
+%ATMEL_MAKE% build BUILD_TYPE=DEBUG      -> build DEBUG executable
+%ATMEL_MAKE% build BUILD_TYPE=RELEASE    -> build RELEASE executable
+%ATMEL_MAKE% clean BUILD_TYPE=DEBUG      -> clean DEBUG build
+%ATMEL_MAKE% clean BUILD_TYPE=RELEASE    -> clean RELEASE build
+%ATMEL_MAKE% empty_dir                   -> create empty Debug and Release directories
+
+Use make empty_dir command in order to create new Debug and Release directories
+on your drive, where part of build artefacts will be stored, or create these
+directories manually.
+
+
+*** Load ***
+
+The ATmega168PB Xplained Mini contains the Mini Embedded Debugger (mEDBG) for
+on-board programming and debugging.
+
+To load the build with Atmel Studio:
+1. Go to Atmel Studio
+2. Connect AVR ATmega168PB Xplained Mini development board to USB port
+3. Select Tools -> Device Programming
+4. Select mEDBG as "Tool" with ATmega168PB as "Device"
+5. Select ISP as "Interface" and click Apply
+6. Select Memories, locate the source .elf file, then click Program
+
+Make sure that both options "Erase device before programming" and "Verify Flash
+after programming" are selected before programming.
+
+If a previous debug session was not closed by selecting "Disable debugWIRE and
+Close" in the Debug menu, the target will still be in debug mode and it will not
+be possible to program the target using the ISP interface. Try to open any debug
+session and close it with "Disable debugWIRE and Close", then load the build.
+
+Read the ATmega168PB Xplained Mini User Guide for further details.
+
+
+*** Fuse and Lock Bits ***
+
+The program works with following settings of Fuse and Lock Bits:
+
+FUSE EXTENDED       0xFF
+FUSE HIGH           0xDC
+FUSE LOW            0xE0
+LOCK LOCKBIT        0xFF
+
+To check settings of Fuse and Lock Bits:
+1. Go to Atmel Studio
+2. Connect AVR ATmega168PB Xplained Mini development board to USB port
+3. Select Tools -> Device Programming
+4. Select mEDBG as "Tool" with ATmega168PB as "Device"
+5. Select ISP as "Interface" and click Apply
+6. Select Fuse and Lock bits, check settings, if needed program new values
+
+BE CAREFUL, as programming of incorrect bits may result in damage or limit
+functionality of the development board, therefore read first AVR ATmega168PB
+Datasheet to understand how fuses and locks influence on behaviour of target
+microcontroller. The fuse and lock settings provided above MAY BE INAPPROPRIATE
+for your development board, e.g. if different target source than 5.0V from
+USB is used.
+
+
+*** Disclaimer ***
+
+This program and above instructions are distributed in the hope that they will
+be useful, but WITHOUT ANY WARRANTY.
+
+You can use the program and above instructions AT YOUR OWN RISK.
+
+IN NO EVENT any copyright holder will be liable to you for damages, including
+any general, special, incidental or consequential damages arising out of the
+use or inability to use the program and above instructions.
+
+See the GNU General Public License under this repository for more details.
+
+
+*** Useful links ***
+
+All necessary software and documentation to build, load and run this program can
+be found at Microchip webpage.
+
+<https://www.microchip.com/>
